@@ -23,16 +23,15 @@ export default defineComponent({
     setup(props, ctx) {
         onMounted(() => {
             // ...
-            armyUnitDetail.value['isShow']= true;
         });
         const armyUnitDetail = ref(ArmyUnitDetail);
         const columns = [
-            { title: 'Name', dataIndex: 'name', key: 'name' },
-            { title: 'Platform', dataIndex: 'platform', key: 'platform' },
-            { title: 'Version', dataIndex: 'version', key: 'version' },
-            { title: 'Upgraded', dataIndex: 'upgradeNum', key: 'upgradeNum' },
-            { title: 'Creator', dataIndex: 'creator', key: 'creator' },
-            { title: 'Date', dataIndex: 'createdAt', key: 'createdAt' },
+            { title: 'Mã đơn vị', dataIndex: 'name', key: 'name' },
+            { title: 'Tên đơn vị', dataIndex: 'platform', key: 'platform' },
+            { title: 'Loại đơn vị', dataIndex: 'creator', key: 'creator' },
+            { title: 'Số điện thoại', dataIndex: 'version', key: 'version' },
+            { title: 'Địa chỉ', dataIndex: 'upgradeNum', key: 'upgradeNum' },
+            { title: 'Mô tả', dataIndex: 'createdAt', key: 'createdAt' },
             { title: '', key: 'operation' },
         ];
        
@@ -70,12 +69,20 @@ export default defineComponent({
                 upgradeNum: 'Upgraded: 56',
             });
         }
+        const addArmyUnit_Click=()=>{
+            try {
+                armyUnitDetail.value['isShowFrom'] = true;
+            } catch (error) {
+                console.log(error)
+            }
+        }
         return {
             columns,
             data,
             innerColumns,
             innerData,
-            armyUnitDetail
+            armyUnitDetail,
+            addArmyUnit_Click
         }
     },
 })

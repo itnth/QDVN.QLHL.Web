@@ -1,7 +1,7 @@
 <template>
   <a-row>
     <a-col :span="24">
-      <a-button class="mr-2" type="primary">Thêm</a-button>
+      <a-button class="mr-2" type="primary" @click="addArmyUnit_Click">Thêm</a-button>
       <a-button  type="primary">Nạp</a-button>
     </a-col>
     <a-col class="pt-4" :span="24">

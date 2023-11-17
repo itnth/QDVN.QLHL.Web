@@ -1,42 +1,65 @@
 <template>
-  <a-modal
-    v-model:open="isShow"
-    title="Đơn vị"
-    centered
-    @ok="isShow = false"
-  >
-    <a-form
-      :model="formState"
-      name="basic"
-      :label-col="{ span: 8 }"
-      :wrapper-col="{ span: 16 }"
-      autocomplete="off"
-      @finish="onFinish"
-      @finishFailed="onFinishFailed"
-    >
-      <a-form-item
-        label="Username"
-        name="username"
-        :rules="[{ required: true, message: 'Please input your username!' }]"
-      >
-        <a-input v-model:value="formState.username" />
-      </a-form-item>
-
-      <a-form-item
-        label="Password"
-        name="password"
-        :rules="[{ required: true, message: 'Please input your password!' }]"
-      >
-        <a-input-password v-model:value="formState.password" />
-      </a-form-item>
-
-      <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
-        <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
-      </a-form-item>
-
-      <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-        <a-button type="primary" html-type="submit">Submit</a-button>
-      </a-form-item>
+  <a-modal width="750px" class="h-2/3" v-model:open="isShowFrom" title="Đơn vị" cancelText="Hủy" okText="Lưu" centered @ok="isShowFrom = false">
+    <a-form :model="masterData" name="basic">
+      <a-row :gutter="[16, 24]">
+        <a-col :span="12"
+          ><a-form-item
+            label="Mã đơn vị"
+            name="Code"
+            :rules="[{ required: true, message: 'Mã đơn vị không được để trống!' }]"
+          >
+            <a-input /> </a-form-item
+        ></a-col>
+        <a-col :span="12">
+          <a-form-item label="Đơn vị cha" name="Parent">
+            <a-select show-search placeholder="Đơn vị cha"></a-select>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row :gutter="[16, 24]">
+        <a-col :span="12">
+          <a-form-item
+            label="Tên đơn vị"
+            name="Code"
+            :rules="[{ required: true, message: 'Tên đơn vị không được để trống!' }]"
+          >
+            <a-input />
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item  label="Loại đơn vị" name="Parent">
+            <a-select show-search placeholder="Loại đơn vị"></a-select>
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row :gutter="[16, 24]">
+        <a-col :span="12"
+          ><a-form-item
+            label="Số điện thoại"
+            name="Tel"
+            :rules="[{ required: true, message: 'Số điện thoại không được để trống!' }]"
+          >
+            <a-input /> </a-form-item
+        ></a-col>
+        <a-col :span="12">
+          <a-form-item
+            label="Địa chỉ"
+            name="Address"
+            :rules="[{ required: true, message: 'Địa chỉ không được để trống!' }]"
+          >
+            <a-input />
+          </a-form-item>
+        </a-col>
+      </a-row>
+      <a-row :gutter="[24]">
+        <a-col :span="24"
+          ><a-form-item label="Mô tả" name="Description">
+            <a-textarea
+              placeholder="Nhập mô tả đơn vị"
+              :auto-size="{ minRows: 10, maxRows: 50 }"
+            /> </a-form-item
+        ></a-col>
+      </a-row>
     </a-form>
   </a-modal>
 </template>
