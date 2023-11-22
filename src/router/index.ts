@@ -20,36 +20,43 @@ const router = createRouter({
         {
           name: 'student',
           path: 'student',
+          meta: { title: 'Quản lý học viên' } ,
           component: Student,
         },
         {
           name: 'statistical',
+          meta: { title: 'Thống kê' } ,
           path: 'statistical',
           component: StatisticalVue,
         },
         {
           name: 'armyunit',
           path: 'armyunit',
+          meta: { title: 'Quản lý đơn vị' } ,
           component: ArmyUnit,
         },
         {
           name: 'managers',
+          meta: { title: 'Quản lý cán bộ' } ,
           path: 'managers',
           component: Managers,
         },
         {
           name: 'devicemanager',
+          meta: { title: 'Trang thiết bị huấn luyện' } ,
           path: 'devicemanager',
           component: DeviceManager,
         },
         {
           name: 'trainingplan',
           path: 'trainingplan',
+          meta: { title: 'Kế hoạch huấn luyện' } ,
           component: TrainingPlan,
         },
         {
           name: 'implementtrainingplans',
           path: 'implementtrainingplans',
+          meta: { title: 'Thực hiện kế hoạch huấn luyện' } ,
           component: ImplementTrainingPlans,
         },
         

@@ -6,16 +6,20 @@ import type { ArmyUnit } from "@/models/ArmyUnit.ts";
 export default defineComponent({
   components: {
   },
-  props: ['isShow'],
+  props: [],
   setup(props, ctx) {
-    const isShowFrom = ref<boolean>(false);
+    const showForm = ref(false)
     const masterData = reactive<ArmyUnit>;
     onMounted(() => {
       // ...
     });
+    const btnOk_click = ()=>{
+
+    };
     return {
       masterData,
-      isShowFrom
+      btnOk_click,
+      showForm
     }
   },
 })

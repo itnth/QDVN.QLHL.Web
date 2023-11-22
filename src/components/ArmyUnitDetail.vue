@@ -1,5 +1,5 @@
 <template>
-  <a-modal width="750px" class="h-2/3" v-model:open="isShowFrom" title="Đơn vị" cancelText="Hủy" okText="Lưu" centered @ok="isShowFrom = false">
+  <a-modal width="750px" class="h-2/3" v-model:open="showForm" title="Đơn vị" cancelText="Hủy" okText="Lưu" centered @ok="btnOk_click">
     <a-form :model="masterData" name="basic">
       <a-row :gutter="[16, 24]">
         <a-col :span="12"
