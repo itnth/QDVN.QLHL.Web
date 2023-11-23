@@ -1,7 +1,6 @@
 import { defineComponent, onMounted, ref } from "vue";
 import "./ArmyUnitDetail.css"
-import { reactive } from 'vue';
-import type { ArmyUnit } from "@/models/ArmyUnit.ts";
+import { ArmyUnit } from "@/models/ArmyUnit.js";
 
 export default defineComponent({
   components: {
@@ -9,7 +8,7 @@ export default defineComponent({
   props: [],
   setup(props, ctx) {
     const showForm = ref(false)
-    const masterData = reactive<ArmyUnit>;
+    const masterData= ref(new ArmyUnit);
     onMounted(() => {
       // ...
     });

@@ -11,7 +11,7 @@ export const Enumeration = {
     Pendding: 2,
     Done: 3
   },
-  Editmode: {
+  EditMode: {
     None: 0,
     Add: 1,
     Edit: 2,

@@ -8,7 +8,7 @@
             name="Code"
             :rules="[{ required: true, message: 'Mã đơn vị không được để trống!' }]"
           >
-            <a-input /> </a-form-item
+            <a-input v-model="masterData.Code" /> </a-form-item
         ></a-col>
         <a-col :span="12">
           <a-form-item label="Đơn vị cha" name="Parent">
