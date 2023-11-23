@@ -25,7 +25,7 @@ export default defineComponent({
     const columns = [
       { title: 'Mã đơn vị', dataIndex: 'Code', key: 'Code' },
       { title: 'Tên đơn vị', dataIndex: 'Name', key: 'Name' },
-      { title: 'Loại đơn vị', dataIndex: 'Type', key: 'Type' },
+      { title: 'Loại đơn vị', dataIndex: 'TypeName', key: 'Type' },
       { title: 'Số điện thoại', dataIndex: 'Tel', key: 'Tel' },
       { title: 'Địa chỉ', dataIndex: 'Address', key: 'Address' },
       { title: 'Mô tả', dataIndex: 'Description', key: 'Description' },
@@ -34,7 +34,7 @@ export default defineComponent({
     const innerColumns = [
       { title: 'Mã đơn vị', dataIndex: 'Code', key: 'Code' },
       { title: 'Tên đơn vị', dataIndex: 'Name', key: 'Name' },
-      { title: 'Loại đơn vị', dataIndex: 'Type', key: 'Type' },
+      { title: 'Loại đơn vị', dataIndex: 'TypeName', key: 'Type' },
       { title: 'Số điện thoại', dataIndex: 'Tel', key: 'Tel' },
       { title: 'Địa chỉ', dataIndex: 'Address', key: 'Address' },
       { title: 'Mô tả', dataIndex: 'Description', key: 'Description' },
@@ -47,15 +47,18 @@ export default defineComponent({
 
     onMounted(async () => {
       try {
-        const res: BaseRespone = await axios.get('ArmyUnit/SelectAll')
-        if (res && res.Success && res.Data) {
-          data.value = <Array<ArmyUnit>>res.Data
-        }
+        loadData()
       } catch (error) {
         console.error(error)
       }
       // ...
     })
+    const loadData = async () => {
+      const res: BaseRespone = await axios.get('ArmyUnit/SelectArmyUnit')
+      if (res && res.Success && res.Data) {
+        data.value = <Array<ArmyUnit>>res.Data
+      }
+    }
     const addArmyUnit_Click = () => {
       try {
         const record = new ArmyUnit()
@@ -73,10 +76,18 @@ export default defineComponent({
         console.log(error)
       }
     }
-    const confirmDelete_Click = (record: ArmyUnit) => {
-      return new Promise((resolve) => {
-        setTimeout(() => resolve(true), 3000)
-      })
+    const confirmDelete_Click = async (record: ArmyUnit) => {
+      record.EditMode = Enumeration.EditMode.Delete;
+      record.children = undefined;
+      const res: BaseRespone = await axios.post('ArmyUnit/SaveData',Array<ArmyUnit>(record))
+      if (res && res.Success ) {
+        loadData();
+      }
+    }
+    const SaveSuccessDetail = (success: any) => {
+      if (success) {
+        loadData();
+      }
     }
     return {
       columns,
@@ -90,7 +101,9 @@ export default defineComponent({
       ReloadOutlined,
       baseList,
       route,
-      showDetail
+      showDetail,
+      SaveSuccessDetail,
+      loadData
     }
   }
 })

@@ -36,28 +36,6 @@
                   </a-popconfirm>
                 </template>
               </template>
-              <template v-if="$props.showChildrens" #expandedRowRender="{ record }">
-                <a-table
-                  v-if="record.childrens && record.childrens.length>0"
-                  :columns="$props.innerColumns"
-                  :data-source="record.childrens"
-                  :pagination="false"
-                >
-                  <template #bodyCell="{ column, record }">
-                    <template v-if="column['key'] && column['key'] === 'operation'">
-                      <a-button @click="edit_Click(record)" class="mr-2" type="primary"
-                        >Sửa</a-button
-                      >
-                      <a-popconfirm
-                        title="Bạn có muốn xóa không?"
-                        @confirm="confirmDelete_Click(record)"
-                      >
-                        <a-button type="primary" danger>Xóa</a-button>
-                      </a-popconfirm>
-                    </template>
-                  </template>
-                </a-table>
-              </template>
             </a-table>
           </a-col>
         </a-row>

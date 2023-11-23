@@ -31,12 +31,30 @@ export default defineComponent({
           const res: BaseRespone = await axios.post('ArmyUnit/SaveData', Array<ArmyUnit>(masterData.value))
           if (res && res.Success && res.Data) {
             // ...
+            showForm.value = false;
+            ctx.emit('SaveSuccess', true);
           }
         })
       }
     }
     const filterOption = (input: string, option: any) => {
       return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
+    };
+    const cboArmyUnit_Change = (e: any, r: ArmyUnit) => {
+      try {
+        // ...
+        masterData.value.ParentName = r.Name;
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    const cboType_Change = (e: any, r: any) => {
+      try {
+        // ...
+        masterData.value.TypeName = r['label'];
+      } catch (error) {
+        console.error(error)
+      }
     }
     return {
       masterData,
@@ -46,7 +64,9 @@ export default defineComponent({
       unitType,
       filterOption,
       armyUnits,
-      show
+      show,
+      cboArmyUnit_Change,
+      cboType_Change
     }
   }
 })
