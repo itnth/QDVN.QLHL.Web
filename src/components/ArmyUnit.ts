@@ -59,9 +59,8 @@ export default defineComponent({
     const addArmyUnit_Click = () => {
       try {
         const record = new ArmyUnit()
-        record.EditMode = Enumeration.EditMode.Edit
-        armyUnitDetail.value['masterData'] = record
-        armyUnitDetail.value['showForm'] = true
+        record.EditMode = Enumeration.EditMode.Add
+        armyUnitDetail.value.show(record)
       } catch (error) {
         console.log(error)
       }
@@ -69,8 +68,7 @@ export default defineComponent({
     const editArmyUnit_Click = (record: ArmyUnit) => {
       try {
         record.EditMode = Enumeration.EditMode.Edit
-        armyUnitDetail.value['masterData'] = record
-        armyUnitDetail.value['showForm'] = true
+        armyUnitDetail.value.show(record)
       } catch (error) {
         console.log(error)
       }
