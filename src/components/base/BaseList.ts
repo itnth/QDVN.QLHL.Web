@@ -1,12 +1,13 @@
-import { defineComponent, defineEmits, onMounted, ref } from "vue";
+import { defineComponent, defineEmits, onMounted, reactive, ref } from "vue";
 import "./BaseList.css"
 import { h } from 'vue';
 import { useRoute } from 'vue-router';
-import { ReloadOutlined } from '@ant-design/icons-vue';
+import { ReloadOutlined, SearchOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
     components: {
-        ReloadOutlined
+        ReloadOutlined,
+        SearchOutlined
     },
 
     props: ['columns', 'innerColumns', 'dataBinding', 'showChildrens'],
@@ -45,6 +46,22 @@ export default defineComponent({
                 console.log(error)
             }
         }
+        const state = reactive({
+            searchText: '',
+            searchedColumn: '',
+        });
+
+        const searchInput = ref();
+        const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
+            confirm();
+            state.searchText = selectedKeys[0];
+            state.searchedColumn = dataIndex;
+        };
+
+        const handleReset = (clearFilters: any) => {
+            clearFilters({ confirm: true });
+            state.searchText = '';
+        };
         return {
             add_Click,
             edit_Click,
@@ -53,6 +70,10 @@ export default defineComponent({
             ReloadOutlined,
             route,
             reload_Click,
+            handleSearch,
+            handleReset,
+            state,
+            searchInput
         }
     },
 })

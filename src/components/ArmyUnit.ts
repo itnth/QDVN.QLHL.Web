@@ -16,6 +16,7 @@ export default defineComponent({
     ReloadOutlined,
     BaseList
   },
+  mixins:[BaseList],
   setup(props, ctx) {
     const route = useRoute()
     const data: any = ref([])
@@ -23,8 +24,63 @@ export default defineComponent({
     const baseList = ref(BaseList)
     const showDetail = ref(false)
     const columns = [
-      { title: 'Mã đơn vị', dataIndex: 'Code', key: 'Code' },
-      { title: 'Tên đơn vị', dataIndex: 'Name', key: 'Name' },
+      {
+        title: 'Mã đơn vị', dataIndex: 'Code', key: 'Code',
+        customFilterDropdown: true,
+        onFilter: (value: any, record: any) => {
+          let valid = false;
+          valid = record.Code.toString().toLowerCase().includes(value.toLowerCase())
+          if (!valid) {
+            let children = record.children
+            while (children && children.length > 0) {
+              children.forEach((item: any) => {
+                valid = item.Code.toString().toLowerCase().includes(value.toLowerCase())
+                if (valid) {
+                  return true;
+                }
+              });
+              children = children.children;
+            }
+          }
+          return valid;
+        },
+        onFilterDropdownOpenChange: (visible: any) => {
+          if (visible) {
+            // setTimeout(() => {
+            //   searchInput.value.focus();
+            // }, 100);
+          }
+        },
+      },
+      {
+        title: 'Tên đơn vị', dataIndex: 'Name', key: 'Name', customFilterDropdown: true,
+        onFilter: (value: any, record: any) => {
+          let valid = false;
+          valid = record.Name.toString().toLowerCase().includes(value.toLowerCase())
+          if (!valid) {
+            let children = record.children
+            while (children && children.length > 0) {
+              children.forEach((item: any) => {
+                valid = item.Name.toString().toLowerCase().includes(value.toLowerCase())
+                if (valid) {
+                  return true;
+                }
+              });
+              children = children.children;
+            }
+          }
+          return valid;
+        },
+        onFilterDropdownOpenChange: (visible: any) => {
+          debugger
+          const me = this;
+          if (visible) {
+            // setTimeout(() => {
+            //   searchInput.value.focus();
+            // }, 100);
+          }
+        },
+      },
       { title: 'Loại đơn vị', dataIndex: 'TypeName', key: 'Type' },
       { title: 'Số điện thoại', dataIndex: 'Tel', key: 'Tel' },
       { title: 'Địa chỉ', dataIndex: 'Address', key: 'Address' },
@@ -79,8 +135,8 @@ export default defineComponent({
     const confirmDelete_Click = async (record: ArmyUnit) => {
       record.EditMode = Enumeration.EditMode.Delete;
       record.children = undefined;
-      const res: BaseRespone = await axios.post('ArmyUnit/SaveData',Array<ArmyUnit>(record))
-      if (res && res.Success ) {
+      const res: BaseRespone = await axios.post('ArmyUnit/SaveData', Array<ArmyUnit>(record))
+      if (res && res.Success) {
         loadData();
       }
     }
