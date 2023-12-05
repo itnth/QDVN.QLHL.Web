@@ -11,4 +11,4 @@
   </div>
   <SubjectDetail @SaveSuccess="SaveSuccessDetail" ref="subjectDetail" />
 </template>
-<script lang="ts" src="./SubjectList.ts" />
+<script lang="ts" src="./StudentList.ts" />
