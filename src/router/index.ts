@@ -1,13 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Student from '@/components/Student.vue'
+import Student from '@/components/StudentList.vue'
 import StatisticalVue from '@/components/Statistical.vue'
 import MainView from '@/views/MainView.vue'
 import ArmyUnit from '@/components/ArmyUnit.vue'
-import Managers from '@/components/Managers.vue'
-import DeviceManager from '@/components/DeviceManager.vue'
+import ManagersList from '@/components/ManagersList.vue'
+import DeviceManager from '@/components/DeviceManagerList.vue'
 import TrainingPlan from '@/components/TrainingPlan.vue'
-import ImplementTrainingPlans from '@/components/ImplementTrainingPlans'
+import ImplementTrainingPlans from '@/components/ImplementTrainingPlans.vue'
+import Class from '@/components/ClassList.vue'
+import Subject from '@/components/SubjectList.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +20,18 @@ const router = createRouter({
       name: 'home',
       redirect: 'statistical',
       children: [
+        {
+          name: 'subject',
+          path: 'subject',
+          meta: { title: 'Quản lý môn học' } ,
+          component: Subject,
+        },
+        {
+          name: 'class',
+          path: 'class',
+          meta: { title: 'Quản lý lớp học' } ,
+          component: Class,
+        },
         {
           name: 'student',
           path: 'student',
@@ -39,7 +54,7 @@ const router = createRouter({
           name: 'managers',
           meta: { title: 'Quản lý cán bộ' } ,
           path: 'managers',
-          component: Managers,
+          component: ManagersList,
         },
         {
           name: 'devicemanager',

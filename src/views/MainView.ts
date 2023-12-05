@@ -8,7 +8,9 @@ import {
     ToolOutlined,
     SolutionOutlined,
     ScheduleOutlined,
-    ClusterOutlined
+    ClusterOutlined,
+    HomeOutlined ,
+    ReadOutlined
 } from '@ant-design/icons-vue'
 export default defineComponent({
     components: {
@@ -18,7 +20,9 @@ export default defineComponent({
         ToolOutlined,
         SolutionOutlined,
         ScheduleOutlined,
-        ClusterOutlined
+        ClusterOutlined,
+        HomeOutlined,
+        ReadOutlined
     },
     setup(props, ctx) {
 

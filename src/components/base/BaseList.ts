@@ -52,7 +52,7 @@ export default defineComponent({
         });
 
         const searchInput = ref();
-        const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
+        const handleSearch = (selectedKeys:any, confirm:any, dataIndex:any) => {
             confirm();
             state.searchText = selectedKeys[0];
             state.searchedColumn = dataIndex;

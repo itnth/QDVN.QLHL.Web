@@ -21,7 +21,7 @@ axios.interceptors.response.use(
 // Define the regex pattern for the date format
 // const datePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3}|\.\d{2}|\.\d{1}|\.\d{4}|\.\d{5}|\.\d{6}|\.\d{7}|\.\d{8}|\.\d{9})?Z$/;
 // eslint-disable-next-line no-useless-escape
-const datePattern = /^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])T(?:[0-1]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+|)(?:Z|(?:\+|\-)(?:\d{2}):?(?:\d{2}))$/
+const datePattern = /^\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2]\d|3[0-1])T(?:[0-1]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+|)(?:|(?:\+|\-)(?:\d{2}):?(?:\d{2}))$/
 // Test function
 const testDateFormat = (input: string) => {
   return datePattern.test(input)

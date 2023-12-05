@@ -44,13 +44,6 @@ export default defineComponent({
           }
           return valid;
         },
-        onFilterDropdownOpenChange: (visible: any) => {
-          if (visible) {
-            // setTimeout(() => {
-            //   searchInput.value.focus();
-            // }, 100);
-          }
-        },
       },
       {
         title: 'Tên đơn vị', dataIndex: 'Name', key: 'Name', customFilterDropdown: true,
@@ -70,15 +63,6 @@ export default defineComponent({
             }
           }
           return valid;
-        },
-        onFilterDropdownOpenChange: (visible: any) => {
-          debugger
-          const me = this;
-          if (visible) {
-            // setTimeout(() => {
-            //   searchInput.value.focus();
-            // }, 100);
-          }
         },
       },
       { title: 'Loại đơn vị', dataIndex: 'TypeName', key: 'Type' },

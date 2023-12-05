@@ -15,31 +15,43 @@
             <span class="f-s">Quản lý đơn vị</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="8">
+        <a-menu-item key="4">
           <ClusterOutlined class="!text-2xl pr-2" />
           <router-link to="/managers">
             <span>Quản lý cán bộ</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="4">
+        <a-menu-item key="5">
+          <HomeOutlined class="!text-2xl pr-2" />
+          <router-link to="/class">
+            <span>Quản lý lớp học</span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="6">
           <TeamOutlined class="!text-2xl pr-2" />
           <router-link to="/student">
             <span>Quản lý học viên</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="5">
+        <a-menu-item key="7">
           <ToolOutlined class="!text-2xl pr-2" />
           <router-link to="/devicemanager">
             <span>Trang thiết bị HL</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="6">
+        <a-menu-item key="8">
+          <ReadOutlined class="!text-2xl pr-2" />
+          <router-link to="/subject">
+            <span>Quản lý môn học</span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="9">
           <SolutionOutlined class="!text-2xl pr-2" />
           <router-link to="/trainingplan">
             <span>Kế hoạch HL</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="7">
+        <a-menu-item key="10">
           <ScheduleOutlined class="!text-2xl pr-2" />
           <router-link to="/implementtrainingplans">
             <span>TH kế hoạch HL</span>
