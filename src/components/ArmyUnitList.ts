@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, ref } from 'vue'
-import './ArmyUnit.css'
+import './ArmyUnitList.css'
 import { h } from 'vue'
 import ArmyUnitDetail from './ArmyUnitDetail.vue'
 import { useRoute } from 'vue-router'
@@ -16,7 +16,7 @@ export default defineComponent({
     ReloadOutlined,
     BaseList
   },
-  mixins:[BaseList],
+  // mixins:[BaseList],
   setup(props, ctx) {
     const route = useRoute()
     const data: any = ref([])

@@ -1,4 +1,4 @@
 <template>
 
 </template>
-<script lang="ts" src="./ArmyUnit.ts"/>
+<script lang="ts" src="./ImplementTrainingPlans.ts"/>
