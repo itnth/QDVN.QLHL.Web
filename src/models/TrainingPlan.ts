@@ -1,6 +1,6 @@
 import { BaseEntity } from "./BaseEntity";
 
-export class Student extends BaseEntity {
+export class TrainingPlan extends BaseEntity {
     SubjectId: String | undefined
     SubjectName: String | undefined
     Code: String | undefined
