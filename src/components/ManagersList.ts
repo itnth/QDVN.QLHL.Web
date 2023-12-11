@@ -35,7 +35,7 @@ export default defineComponent({
                 },
             },
             {
-                title: 'Ngày sinh', dataIndex: 'DateOfBirth', key: 'DateOfBirth',
+                title: 'Ngày sinh', dataIndex: 'DateOfBirth', key: 'DateOfBirth', DataType:"Date"
             },
             { title: 'Số điện thoại', dataIndex: 'Mobile', key: 'Mobile' },
             { title: 'Cấp bậc', dataIndex: 'RankName', key: 'Rank' },

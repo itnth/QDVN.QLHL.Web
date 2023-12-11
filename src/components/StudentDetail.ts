@@ -1,6 +1,5 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import './StudentDetail.css'
-import { Managers } from '@/models/Managers.js'
 import { CommonStored } from '@/common/CommonStored'
 import type { BaseRespone } from '@/models/BaseRespone'
 import axios from '@/common/axios'

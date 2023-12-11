@@ -3,6 +3,7 @@ import "./BaseList.css"
 import { h } from 'vue';
 import { useRoute } from 'vue-router';
 import { ReloadOutlined, SearchOutlined } from '@ant-design/icons-vue';
+import moment from "moment";
 
 export default defineComponent({
     components: {
@@ -73,7 +74,8 @@ export default defineComponent({
             handleSearch,
             handleReset,
             state,
-            searchInput
+            searchInput,
+            moment
         }
     },
 })

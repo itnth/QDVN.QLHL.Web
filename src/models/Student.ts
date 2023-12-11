@@ -15,4 +15,5 @@ export class Student extends BaseEntity {
     ClassId: String|undefined
     ClassName: String|undefined
     StartTime: Date|undefined
+    Point: Number|undefined
 }

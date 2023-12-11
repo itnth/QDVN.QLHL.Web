@@ -19,6 +19,7 @@ export default defineComponent({
     const show = async (data: Subject) => {
       showForm.value = true
       masterData.value = data
+      
     }
     const btnOk_click = () => {
       if (masterData.value) {

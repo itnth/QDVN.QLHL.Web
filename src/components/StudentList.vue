@@ -9,6 +9,6 @@
       @edit_Click="edit_Click"
     />
   </div>
-  <SubjectDetail @SaveSuccess="SaveSuccessDetail" ref="subjectDetail" />
+  <StudentDetail @SaveSuccess="SaveSuccessDetail" ref="studentDetail" />
 </template>
 <script lang="ts" src="./StudentList.ts" />

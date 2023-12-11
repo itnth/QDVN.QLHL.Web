@@ -40,7 +40,7 @@
                     :placeholder="`Search ${column.dataIndex}`"
                     :value="selectedKeys[0]"
                     style="width: 188px; margin-bottom: 8px; display: block"
-                    @change="(e:any) => setSelectedKeys(e.target.value ? [e.target.value] : [])"
+                    @change="(e: any) => setSelectedKeys(e.target.value ? [e.target.value] : [])"
                     @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)"
                   />
                   <a-button
@@ -86,18 +86,10 @@
                     <template v-else>{{ fragment }}</template>
                   </template>
                 </span>
-              </template>
-              <!-- <template #bodyCell="{ column, record }">
-                <template v-if="column.key === 'operation'">
-                  <a-button @click="edit_Click(record)" class="mr-2" type="primary">Sửa</a-button>
-                  <a-popconfirm
-                    title="Bạn có muốn xóa không?"
-                    @confirm="confirmDelete_Click(record)"
-                  >
-                    <a-button type="primary" danger>Xóa</a-button>
-                  </a-popconfirm>
+                <template v-if="column.DataType === 'Date'">
+                  <span> {{ moment(text).format('DD/MM/YYYY') }} </span>
                 </template>
-              </template> -->
+              </template>
             </a-table>
           </a-col>
         </a-row>

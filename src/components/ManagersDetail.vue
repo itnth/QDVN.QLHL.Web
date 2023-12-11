@@ -76,6 +76,7 @@
               :options="positions"
               :filter-option="filterOption"
               placeholder="Chức vụ"
+              :allowClear="true"
             ></a-select>
           </a-form-item>
         </a-col>

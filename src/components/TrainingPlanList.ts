@@ -5,12 +5,12 @@ import type { BaseRespone } from "@/models/BaseRespone";
 import axios from "@/common/axios";
 import { Enumeration } from "@/common/Enum";
 import moment from "moment";
-import DeviceManagerDetail from "./DeviceManagerDetail.vue";
+import TrainingPlanDetail from "./TrainingPlanDetail.vue";
 import BaseList from './base/BaseList.vue'
 
 export default defineComponent({
     components: {
-        DeviceManagerDetail,
+        TrainingPlanDetail,
         BaseList
     },
     setup(props, ctx) {
@@ -18,33 +18,33 @@ export default defineComponent({
             // ...
             loadData();
         })
-        const deviceManagerDetail = ref(DeviceManagerDetail)
+        const trainingPlanDetail = ref(TrainingPlanDetail)
         const data: any = ref([]);
         const columns = [
             {
-                title: 'Mã trang bị', dataIndex: 'Code', key: 'Code',
+                title: 'Mã kế hoạch', dataIndex: 'Code', key: 'Code',
                 customFilterDropdown: true,
                 onFilter: (value: any, record: any) => {
                     return record.Code.toString().toLowerCase().includes(value.toLowerCase());
                 },
             },
             {
-                title: 'Tên trang bị', dataIndex: 'Name', key: 'Name', customFilterDropdown: true,
+                title: 'Tên kế hoạch', dataIndex: 'Name', key: 'Name', customFilterDropdown: true,
                 onFilter: (value: any, record: any) => {
                     return record.Name.toString().toLowerCase().includes(value.toLowerCase());
                 },
             },
             {
-                title: 'Loại trang bị', dataIndex: 'TypeName', key: 'TypeName', customFilterDropdown: true,
+                title: 'Tên môn học', dataIndex: 'SubjectName', key: 'SubjectName ', customFilterDropdown: true,
                 onFilter: (value: any, record: any) => {
                     return record.Name.toString().toLowerCase().includes(value.toLowerCase());
                 },
             },
             {
-                title: 'Kích thước', dataIndex: 'Size', key: 'Size', customFilterDropdown: true,
-                onFilter: (value: any, record: any) => {
-                    return record.Name.toString().toLowerCase().includes(value.toLowerCase());
-                },
+                title: 'Ngày thực hiện', dataIndex: 'StartDate', key: 'StartDate', DataType:"Date"
+            },
+            {
+                title: 'Ngày kết thúc', dataIndex: 'EndDate', key: 'EndDate',DataType:"Date"
             },
             { title: '', key: 'operation' }
         ];
@@ -52,7 +52,7 @@ export default defineComponent({
             try {
                 const record = new TrainingPlan()
                 record.EditMode = Enumeration.EditMode.Add
-                deviceManagerDetail.value.show(record)
+                trainingPlanDetail.value.show(record)
             } catch (error) {
                 console.log(error)
             }
@@ -60,7 +60,7 @@ export default defineComponent({
         const edit_Click = (record: TrainingPlan) => {
             try {
                 record.EditMode = Enumeration.EditMode.Edit
-                deviceManagerDetail.value.show(record)
+                trainingPlanDetail.value.show(record)
             } catch (error) {
                 console.log(error)
             }
@@ -91,7 +91,7 @@ export default defineComponent({
             SaveSuccessDetail,
             data,
             loadData,
-            deviceManagerDetail, moment
+            trainingPlanDetail, moment
         }
     },
 })

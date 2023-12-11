@@ -7,7 +7,7 @@ import ArmyUnit from '@/components/ArmyUnitList.vue'
 import ManagersList from '@/components/ManagersList.vue'
 import DeviceManager from '@/components/DeviceManagerList.vue'
 import TrainingPlan from '@/components/TrainingPlanList.vue'
-import ImplementTrainingPlans from '@/components/ImplementTrainingPlans.vue'
+import ImplementTrainingPlans from '@/components/ImplementTrainingPlansList.vue'
 import Class from '@/components/ClassList.vue'
 import Subject from '@/components/SubjectList.vue'
 

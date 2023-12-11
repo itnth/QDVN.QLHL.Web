@@ -9,6 +9,6 @@
       @edit_Click="edit_Click"
     />
   </div>
-  <DeviceManagerDetail @SaveSuccess="SaveSuccessDetail" ref="deviceManagerDetail" />
+  <TrainingPlanDetail @SaveSuccess="SaveSuccessDetail" ref="trainingPlanDetail" />
 </template>
 <script lang="ts" src="./TrainingPlanList.ts" />
