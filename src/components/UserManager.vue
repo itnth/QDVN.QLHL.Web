@@ -7,10 +7,8 @@
       @delete_Click="confirmDelete_Click"
       @add_Click="add_Click"
       @edit_Click="edit_Click"
-      :showChildrens="true"
-      :innerColumns="innerColumns"
     />
   </div>
-  <TrainingPlanDetail @SaveSuccess="SaveSuccessDetail" ref="trainingPlanDetail" />
+  <UserManagerDetail @SaveSuccess="SaveSuccessDetail" ref="userManagerDetail" />
 </template>
-<script lang="ts" src="./TrainingPlanList.ts" />
+<script lang="ts" src="./UserManager.ts" />

@@ -33,21 +33,33 @@
       </a-row>
       <a-row :gutter="[16, 24]">
         <a-col :span="12">
-          <a-form-item label="Môn học" name="Subject">
+          <a-form-item label="Nội dung" name="Subject">
             <a-select
               show-search
               v-model:value="masterData.SubjectId"
               @change="cboSubject_Change"
               :options="SubjectDatas"
               :filter-option="filterOption"
-              placeholder="Môn học"
+              placeholder="Nội dung"
               :fieldNames="{ label: 'Name', value: 'Id' }"
             ></a-select>
           </a-form-item>
         </a-col>
-        <a-col :span="12"><a-form-item name="Date"> </a-form-item></a-col>
+        <a-col :span="12">
+          <a-form-item label="Kế hoạch cha" name="Parent">
+            <a-select
+              show-search
+              v-model:value="masterData.ParentId"
+              :options="TrainingPlansData"
+              :fieldNames="{ label: 'Name', value: 'Id' }"
+              :filter-option="filterOption"
+              placeholder="Kế hoạch cha"
+              @change="cboParent_Change"
+            ></a-select>
+          </a-form-item>
+        </a-col>
       </a-row>
-      <a-row :gutter="[16, 24]">
+      <a-row :gutter="[16, 24]" class="hidden">
         <a-col :span="12">
           <a-form-item
             label="Ngày thực hiện"
@@ -73,6 +85,26 @@
               :format="'DD/MM/YYYY'"
             /> </a-form-item
         ></a-col>
+      </a-row>
+      <a-row :gutter="[16, 24]">
+        <a-col :span="12">
+          <a-form-item label="Đơn vị" name="UnitId">
+            <a-select
+              show-search
+              v-model:value="masterData.ArmyUnitId"
+              @change="cboArmyUnit_Change"
+              :options="armyUnits"
+              :fieldNames="{ label: 'Name', value: 'Id' }"
+              :filter-option="filterOption"
+              placeholder="Đơn vị"
+            ></a-select>
+          </a-form-item>
+        </a-col>
+        <a-col :span="12">
+          <a-form-item label="Số tiết" name="NumberOfLesson">
+            <a-input-number v-model:value="masterData.NumberOfLesson" class="w-full" />
+          </a-form-item>
+        </a-col>
       </a-row>
       <a-row>
         <Editor

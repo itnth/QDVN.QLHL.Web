@@ -3,20 +3,32 @@ import './TrainingPlanDetail.css'
 import { CommonStored } from '@/common/CommonStored'
 import type { BaseRespone } from '@/models/BaseRespone'
 import axios from '@/common/axios'
-import { TrainingPlan } from "@/models/TrainingPlan"
-import dayjs, { Dayjs } from "dayjs";
-import  { Class } from '@/models/Class'
-import Editor from '@tinymce/tinymce-vue';
-import tinymce from 'tinymce/tinymce';
+import { TrainingPlan } from '@/models/TrainingPlan'
+import dayjs, { Dayjs } from 'dayjs'
+import { Class } from '@/models/Class'
+import Editor from '@tinymce/tinymce-vue'
+import tinymce from 'tinymce/tinymce'
+import type { Managers } from '@/models/Managers'
 export default defineComponent({
-  components: {Editor},
+  components: { Editor },
   props: [],
   setup(props, ctx) {
     const showForm = ref(false)
     const formRef = ref()
     const SubjectDatas = ref([])
+    const TrainingPlansData = ref([])
+    const ManagersData = ref([])
     const masterData = ref(new TrainingPlan())
     const types = ref(CommonStored.DeviceTypes)
+    const armyUnits: any = ref([])
+    const cboArmyUnit_Change = (e: any, r: ArmyUnit) => {
+      try {
+        // ...
+        masterData.value.ArmyUnitName = r.Name
+      } catch (error) {
+        console.error(error)
+      }
+    }
     const editorInit = ref({
       powerpaste_word_import: 'merge',
       toolbar_mode: 'sliding',
@@ -101,7 +113,8 @@ export default defineComponent({
       toolbar1:
         'undo redo | styles fontfamily fontsize align lineheight | bold italic underline strikethrough superscript subscript | alignleft aligncenter alignright alignjustify | ' +
         'bullist numlist outdent indent | link image | print preview media fullscreen ',
-      toolbar2: 'formatpainter | save | restoredraft | autosave | forecolor backcolor emoticons | help'
+      toolbar2:
+        'formatpainter | save | restoredraft | autosave | forecolor backcolor emoticons | help'
     })
     onMounted(async () => {
       // ...
@@ -110,34 +123,61 @@ export default defineComponent({
     const show = async (data: TrainingPlan) => {
       showForm.value = true
       masterData.value = data
-      masterData.value.StartDate  = dayjs(masterData.value.StartDate)
-      masterData.value.EndDate  = dayjs(masterData.value.EndDate)
+      masterData.value.StartDate = dayjs(masterData.value.StartDate)
+      masterData.value.EndDate = dayjs(masterData.value.EndDate)
       const res: BaseRespone = await axios.get('Subject/SelectAll')
       if (res && res.Success && res.Data) {
         SubjectDatas.value = <Array<Class>>res.Data
       }
-      // masterData.value.StartDate  = dayjs(masterData.value.StartDate)
-      // masterData.value.EndDate  = dayjs(masterData.value.EndDate)
+      const resTP: BaseRespone = await axios.get('TrainingPlan/SelectAll')
+      if (resTP && resTP.Success && resTP.Data) {
+        TrainingPlansData.value = <Array<TrainingPlan>>resTP.Data
+      }
+      const resM: BaseRespone = await axios.get('Managers/SelectAll')
+      if (resM && resM.Success && resM.Data) {
+        ManagersData.value = <Array<Managers>>resM.Data
+      }
+      const resAU: BaseRespone = await axios.get('ArmyUnit/SelectAll')
+      if (resAU && resAU.Success && resAU.Data) {
+        armyUnits.value = <Array<ArmyUnit>>resAU.Data
+      }
     }
     const btnOk_click = () => {
       if (masterData.value) {
         formRef.value.validate().then(async () => {
-          const res: BaseRespone = await axios.post('TrainingPlan/SaveData', Array<TrainingPlan>(masterData.value))
+          const res: BaseRespone = await axios.post(
+            'TrainingPlan/SaveData',
+            Array<TrainingPlan>(masterData.value)
+          )
           if (res && res.Success && res.Data) {
             // ...
-            showForm.value = false;
-            ctx.emit('SaveSuccess', true);
+            showForm.value = false
+            ctx.emit('SaveSuccess', true)
           }
         })
       }
     }
     const filterOption = (input: string, option: any) => {
       return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    };
+    }
     const cboSubject_Change = (e: any, r: any) => {
       try {
         // ...
-        masterData.value.SubjectName = r.Name;
+        masterData.value.SubjectName = r.Name
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    const cboParent_Change = (e: any, r: TrainingPlan) => {
+      try {
+        masterData.value.ParentName = r.ParentName
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    const cboManager_Change = (e: any, r: Managers) => {
+      try {
+        masterData.value.ManagerName = r.FullName
       } catch (error) {
         console.error(error)
       }
@@ -153,7 +193,13 @@ export default defineComponent({
       cboSubject_Change,
       types,
       SubjectDatas,
-      editorInit
+      ManagersData,
+      TrainingPlansData,
+      editorInit,
+      cboManager_Change,
+      cboParent_Change,
+      armyUnits,
+      cboArmyUnit_Change
     }
   }
 })

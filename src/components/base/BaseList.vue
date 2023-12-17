@@ -1,4 +1,3 @@
-,
 <template>
   <a-row>
     <a-col :span="24">
@@ -34,20 +33,45 @@
                   column
                 }"
               >
-                <div style="padding: 8px">
+                <div style="padding: 8px" v-if="!column.isComboboxFilter">
                   <a-input
                     ref="searchInput"
                     :placeholder="`Search ${column.dataIndex}`"
                     :value="selectedKeys[0]"
                     style="width: 188px; margin-bottom: 8px; display: block"
                     @change="(e: any) => setSelectedKeys(e.target.value ? [e.target.value] : [])"
-                    @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)"
+                    @pressEnter="handleSearch(selectedKeys, confirm, column)"
                   />
                   <a-button
                     type="primary"
                     size="small"
                     style="width: 90px; margin-right: 8px"
-                    @click="handleSearch(selectedKeys, confirm, column.dataIndex)"
+                    @click="handleSearch(selectedKeys, confirm, column)"
+                  >
+                    <template #icon><SearchOutlined /></template>
+                    Search
+                  </a-button>
+                  <a-button size="small" style="width: 90px" @click="handleReset(clearFilters)">
+                    Reset
+                  </a-button>
+                </div>
+                <div v-else style="padding: 8px">
+                  <a-select
+                    ref="select"
+                    :placeholder="`Search ${column.dataIndex}`"
+                    :value="selectedKeys[0]"
+                    :options="column.comboboxOptions"
+                    :fieldNames="{ label: 'Name', value: 'Id' }"
+                    :filter-option="filterOption"
+                    style="width: 188px; margin-bottom: 8px; display: block"
+                    @change="(e) => setSelectedKeys(e ? [e] : [])"
+                    @pressEnter="handleSearch(selectedKeys, confirm, column)"
+                  />
+                  <a-button
+                    type="primary"
+                    size="small"
+                    style="width: 90px; margin-right: 8px"
+                    @click="handleSearch(selectedKeys, confirm, column)"
                   >
                     <template #icon><SearchOutlined /></template>
                     Search

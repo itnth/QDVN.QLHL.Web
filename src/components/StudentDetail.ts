@@ -4,9 +4,9 @@ import { CommonStored } from '@/common/CommonStored'
 import type { BaseRespone } from '@/models/BaseRespone'
 import axios from '@/common/axios'
 import type { ArmyUnit } from '@/models/ArmyUnit'
-import { Student } from "@/models/Student.js"
-import dayjs, { Dayjs } from "dayjs";
-import  { Class } from '@/models/Class'
+import { Student } from '@/models/Student.js'
+import dayjs, { Dayjs } from 'dayjs'
+import { Class } from '@/models/Class'
 
 export default defineComponent({
   components: {},
@@ -26,8 +26,15 @@ export default defineComponent({
     const show = async (data: Student) => {
       showForm.value = true
       masterData.value = data
-      masterData.value.DateOfBirth  = dayjs(masterData.value.DateOfBirth)
-      masterData.value.StartTime  = dayjs(masterData.value.StartTime)
+      if (masterData.value.SchoolYear) {
+        const arrYear = masterData.value.SchoolYear.split(' - ')
+        masterData.value.SchoolYearDate = [
+          dayjs(`17-06-${arrYear[0]}`, 'DD-MM-YYYY'),
+          dayjs(`17-06-${arrYear[1]}`, 'DD-MM-YYYY')
+        ]
+      }
+      masterData.value.DateOfBirth = dayjs(masterData.value.DateOfBirth)
+      masterData.value.StartTime = dayjs(masterData.value.StartTime)
       const res: BaseRespone = await axios.get('ArmyUnit/SelectAll')
       if (res && res.Success && res.Data) {
         armyUnits.value = <Array<Student>>res.Data
@@ -40,22 +47,30 @@ export default defineComponent({
     const btnOk_click = () => {
       if (masterData.value) {
         formRef.value.validate().then(async () => {
-          const res: BaseRespone = await axios.post('Student/SaveData', Array<Student>(masterData.value))
+          if (masterData.value.SchoolYearDate && masterData.value.SchoolYearDate.length > 1) {
+            const fromYear = dayjs(masterData.value.SchoolYearDate[0]).year()
+            const toYear = dayjs(masterData.value.SchoolYearDate[1]).year()
+            masterData.value.SchoolYear = `${fromYear} - ${toYear}`
+          }
+          const res: BaseRespone = await axios.post(
+            'Student/SaveData',
+            Array<Student>(masterData.value)
+          )
           if (res && res.Success && res.Data) {
             // ...
-            showForm.value = false;
-            ctx.emit('SaveSuccess', true);
+            showForm.value = false
+            ctx.emit('SaveSuccess', true)
           }
         })
       }
     }
     const filterOption = (input: string, option: any) => {
       return option.value.toLowerCase().indexOf(input.toLowerCase()) >= 0
-    };
+    }
     const cboRank_Change = (e: any, r: any) => {
       try {
         // ...
-        masterData.value.RankName = r['label'];
+        masterData.value.RankName = r['label']
       } catch (error) {
         console.error(error)
       }
@@ -63,15 +78,15 @@ export default defineComponent({
     const cboPosition_Change = (e: any, r: any) => {
       try {
         // ...
-        masterData.value.PositionName = r['label'];
+        masterData.value.PositionName = r['label']
       } catch (error) {
         console.error(error)
       }
-    };
+    }
     const cboArmyUnit_Change = (e: any, r: ArmyUnit) => {
       try {
         // ...
-        masterData.value.ArmyUnitName = r.Name;
+        masterData.value.ArmyUnitName = r.Name
       } catch (error) {
         console.error(error)
       }
@@ -79,12 +94,12 @@ export default defineComponent({
     const cboClass_Change = (e: any, r: Class) => {
       try {
         // ...
-        masterData.value.ClassName = r.Name;
+        masterData.value.ClassName = r.Name
       } catch (error) {
         console.error(error)
       }
     }
-    
+
     return {
       masterData,
       btnOk_click,

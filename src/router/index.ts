@@ -10,7 +10,7 @@ import TrainingPlan from '@/components/TrainingPlanList.vue'
 import ImplementTrainingPlans from '@/components/ImplementTrainingPlansList.vue'
 import Class from '@/components/ClassList.vue'
 import Subject from '@/components/SubjectList.vue'
-
+import UserManager from '@/components/UserManager.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,59 +23,63 @@ const router = createRouter({
         {
           name: 'subject',
           path: 'subject',
-          meta: { title: 'Quản lý môn học' } ,
-          component: Subject,
+          meta: { title: 'Nội dung huấn luyện' },
+          component: Subject
         },
         {
           name: 'class',
           path: 'class',
-          meta: { title: 'Quản lý lớp học' } ,
-          component: Class,
+          meta: { title: 'Quản lý lớp học' },
+          component: Class
         },
         {
           name: 'student',
           path: 'student',
-          meta: { title: 'Quản lý học viên' } ,
-          component: Student,
+          meta: { title: 'Quản lý học viên' },
+          component: Student
         },
         {
           name: 'statistical',
-          meta: { title: 'Thống kê' } ,
+          meta: { title: 'Thống kê' },
           path: 'statistical',
-          component: StatisticalVue,
+          component: StatisticalVue
         },
         {
           name: 'armyunit',
           path: 'armyunit',
-          meta: { title: 'Quản lý đơn vị' } ,
-          component: ArmyUnit,
+          meta: { title: 'Quản lý đơn vị' },
+          component: ArmyUnit
         },
         {
           name: 'managers',
-          meta: { title: 'Quản lý cán bộ' } ,
+          meta: { title: 'Quản lý cán bộ' },
           path: 'managers',
-          component: ManagersList,
+          component: ManagersList
         },
         {
           name: 'devicemanager',
-          meta: { title: 'Trang thiết bị huấn luyện' } ,
+          meta: { title: 'Trang thiết bị huấn luyện' },
           path: 'devicemanager',
-          component: DeviceManager,
+          component: DeviceManager
         },
         {
           name: 'trainingplan',
           path: 'trainingplan',
-          meta: { title: 'Kế hoạch huấn luyện' } ,
-          component: TrainingPlan,
+          meta: { title: 'Kế hoạch huấn luyện' },
+          component: TrainingPlan
         },
         {
           name: 'implementtrainingplans',
           path: 'implementtrainingplans',
-          meta: { title: 'Thực hiện kế hoạch huấn luyện' } ,
-          component: ImplementTrainingPlans,
+          meta: { title: 'Thực hiện kế hoạch huấn luyện' },
+          component: ImplementTrainingPlans
         },
-        
-        
+        {
+          name: 'users',
+          path: 'users',
+          meta: { title: 'Quản lý tài khoản' },
+          component: UserManager
+        }
       ]
     },
     {

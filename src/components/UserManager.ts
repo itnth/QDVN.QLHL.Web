@@ -1,16 +1,16 @@
 import { defineComponent, onMounted, ref } from 'vue'
-import './SubjectList.css'
-import { Subject } from '@/models/Subject'
+import './UserManager.css'
 import type { BaseRespone } from '@/models/BaseRespone'
 import axios from '@/common/axios'
 import { Enumeration } from '@/common/Enum'
 import moment from 'moment'
-import SubjectDetail from './SubjectDetail.vue'
+import UserManagerDetail from './UserManagerDetail.vue'
 import BaseList from './base/BaseList.vue'
+import { User } from '@/models/User'
 
 export default defineComponent({
   components: {
-    SubjectDetail,
+    UserManagerDetail,
     BaseList
   },
   setup(props, ctx) {
@@ -18,67 +18,58 @@ export default defineComponent({
       // ...
       loadData()
     })
-    const subjectDetail = ref(SubjectDetail)
+    const userManagerDetail = ref(UserManagerDetail)
     const data: any = ref([])
     const columns = [
       {
-        title: 'Mã nội dung',
-        dataIndex: 'Code',
-        key: 'Code',
+        title: 'Tên đăng nhập',
+        dataIndex: 'Username',
+        key: 'Username',
         customFilterDropdown: true,
         onFilter: (value: any, record: any) => {
-          return record.Code.toString().toLowerCase().includes(value.toLowerCase())
+          return record.Username.toString().toLowerCase().includes(value.toLowerCase())
         }
       },
       {
-        title: 'Tên nội dung',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: 'Email',
+        dataIndex: 'Email',
+        key: 'Email',
         customFilterDropdown: true,
         onFilter: (value: any, record: any) => {
-          return record.Name.toString().toLowerCase().includes(value.toLowerCase())
+          return record.Email.toString().toLowerCase().includes(value.toLowerCase())
         }
       },
       {
-        title: 'Số buổi',
-        dataIndex: 'NumberOfLesson',
-        key: 'NumberOfLesson',
+        title: 'Số điện thoại',
+        dataIndex: 'Tel',
+        key: 'Tel',
         customFilterDropdown: true,
         onFilter: (value: any, record: any) => {
-          return record.NumberOfLesson == value.toLowerCase
-        }
-      },
-      {
-        title: 'Số tín chỉ',
-        dataIndex: 'NumberOfCredit',
-        key: 'NumberOfCredit',
-        customFilterDropdown: true,
-        onFilter: (value: any, record: any) => {
-          return record.NumberOfCredit == value.toLowerCase
+          return record.Tel.toString().toLowerCase().includes(value.toLowerCase())
         }
       },
       { title: '', key: 'operation' }
     ]
     const add_Click = () => {
       try {
-        const record = new Subject()
+        const record = new User()
         record.EditMode = Enumeration.EditMode.Add
-        subjectDetail.value.show(record)
+        userManagerDetail.value.show(record)
       } catch (error) {
         console.log(error)
       }
     }
-    const edit_Click = (record: Subject) => {
+    const edit_Click = (record: User) => {
       try {
         record.EditMode = Enumeration.EditMode.Edit
-        subjectDetail.value.show(record)
+        userManagerDetail.value.show(record)
       } catch (error) {
         console.log(error)
       }
     }
-    const confirmDelete_Click = async (record: Subject) => {
+    const confirmDelete_Click = async (record: User) => {
       record.EditMode = Enumeration.EditMode.Delete
-      const res: BaseRespone = await axios.post('Subject/SaveData', Array<Subject>(record))
+      const res: BaseRespone = await axios.post('Users/SaveData', Array<User>(record))
       if (res && res.Success) {
         loadData()
       }
@@ -89,9 +80,9 @@ export default defineComponent({
       }
     }
     const loadData = async () => {
-      const res: BaseRespone = await axios.get('Subject/SelectAll')
+      const res: BaseRespone = await axios.get('Users/SelectAll')
       if (res && res.Success && res.Data) {
-        data.value = <Array<Subject>>res.Data
+        data.value = <Array<User>>res.Data
       }
     }
     return {
@@ -102,7 +93,7 @@ export default defineComponent({
       SaveSuccessDetail,
       data,
       loadData,
-      subjectDetail,
+      userManagerDetail,
       moment
     }
   }

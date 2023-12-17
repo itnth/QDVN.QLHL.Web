@@ -21,12 +21,12 @@
             <span>Quản lý cán bộ</span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="5">
+        <!-- <a-menu-item key="5">
           <HomeOutlined class="!text-2xl pr-2" />
           <router-link to="/class">
             <span>Quản lý lớp học</span>
           </router-link>
-        </a-menu-item>
+        </a-menu-item> -->
         <a-menu-item key="6">
           <TeamOutlined class="!text-2xl pr-2" />
           <router-link to="/student">
@@ -42,7 +42,7 @@
         <a-menu-item key="8">
           <ReadOutlined class="!text-2xl pr-2" />
           <router-link to="/subject">
-            <span>Quản lý môn học</span>
+            <span>Nội dung HL</span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="9">
@@ -57,12 +57,18 @@
             <span>TH kế hoạch HL</span>
           </router-link>
         </a-menu-item>
+        <a-menu-item key="11">
+          <TeamOutlined class="!text-2xl pr-2" />
+          <router-link to="/users">
+            <span>Quản lý tài khoản</span>
+          </router-link>
+        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0" />
       <a-layout-content class="p-4 m-2 h-full bg-white">
-        <div :style="{  background: '#fff', minHeight: '360px' }">
+        <div :style="{ background: '#fff', minHeight: '360px' }">
           <RouterView></RouterView>
         </div>
       </a-layout-content>
@@ -72,6 +78,33 @@
         </div>
       </a-layout-footer>
     </a-layout>
+    <a-modal
+      :destroyOnClose="true"
+      width="300px"
+      class="h-2/3"
+      v-model:open="showLogin"
+      :footer="null"
+      :closable="false"
+      centered
+      :maskClosable="false"
+    >
+      <h1 class="text-center font-bold text-lg uppercase">Đăng nhập</h1>
+      <a-row class="mt-4">
+        <a-col :span="24">
+          <a-form-item name="Username" label="Tên đăng nhập:">
+            <a-input v-model:value="loginInfo.Username" placeholder="Tên đăng nhập" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-form-item name="Pasword" label="Mật khẩu:">
+            <a-input-password v-model:value="loginInfo.Password" placeholder="Mật khẩu" />
+          </a-form-item>
+        </a-col>
+        <a-col :span="24">
+          <a-button type="primary" class="w-full" @click="login">Đăng nhập</a-button>
+        </a-col>
+      </a-row>
+    </a-modal>
   </a-layout>
 </template>
 <script lang="ts" src="./MainView.ts"></script>

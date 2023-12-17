@@ -10,8 +10,7 @@
     centered
     @ok="btnOk_click"
   >
-    <a-form ref="formRef" :model="masterData" name="basic" 
->
+    <a-form ref="formRef" :model="masterData" name="basic">
       <a-row :gutter="[16, 24]">
         <a-col :span="12"
           ><a-form-item
@@ -87,7 +86,11 @@
             name="DateOfBirth"
             :rules="[{ required: true, message: 'Ngày sinh không được để trống!' }]"
           >
-            <a-date-picker class="!w-full" v-model:value="masterData.DateOfBirth" :format="'DD/MM/YYYY'" /> </a-form-item
+            <a-date-picker
+              class="!w-full"
+              v-model:value="masterData.DateOfBirth"
+              :format="'DD/MM/YYYY'"
+            /> </a-form-item
         ></a-col>
         <a-col :span="12">
           <a-form-item
@@ -101,7 +104,7 @@
       </a-row>
       <a-row :gutter="[16, 24]">
         <a-col :span="12">
-          <a-form-item label="Lớp học" name="Class">
+          <!-- <a-form-item label="Lớp học" name="Class">
             <a-select
               show-search
               v-model:value="masterData.ClassId"
@@ -111,6 +114,9 @@
               :fieldNames="{ label: 'Name', value: 'Id' }"
               placeholder="Lớp học"
             ></a-select>
+          </a-form-item> -->
+          <a-form-item label="Khóa học" name="SchoolYearDate">
+            <a-range-picker picker="year" v-model:value="masterData.SchoolYearDate" />
           </a-form-item>
         </a-col>
         <a-col :span="12"
@@ -119,7 +125,11 @@
             name="StartTime"
             :rules="[{ required: true, message: 'Ngày nhập học được để trống!' }]"
           >
-            <a-date-picker class="!w-full" v-model:value="masterData.StartTime" :format="'DD/MM/YYYY'" /> </a-form-item
+            <a-date-picker
+              class="!w-full"
+              v-model:value="masterData.StartTime"
+              :format="'DD/MM/YYYY'"
+            /> </a-form-item
         ></a-col>
       </a-row>
     </a-form>

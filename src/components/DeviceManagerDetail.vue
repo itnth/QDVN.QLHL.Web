@@ -10,8 +10,7 @@
     centered
     @ok="btnOk_click"
   >
-    <a-form ref="formRef" :model="masterData" name="basic" 
->
+    <a-form ref="formRef" :model="masterData" name="basic">
       <a-row :gutter="[16, 24]">
         <a-col :span="12"
           ><a-form-item
@@ -45,13 +44,24 @@
           </a-form-item>
         </a-col>
         <a-col :span="12"
-          ><a-form-item
-            label="Kích thước"
-            name="Size"
-          >
-            <a-input v-model:value="masterData.Size" /> </a-form-item
+          ><a-form-item label="Số lượng" name="Quantity">
+            <a-input-number v-model:value="masterData.Quantity" class="w-full" /> </a-form-item
         ></a-col>
-        
+      </a-row>
+      <a-row :gutter="[16, 24]">
+        <a-col :span="12">
+          <a-form-item label="Đơn vị" name="UnitId">
+            <a-select
+              show-search
+              v-model:value="masterData.ArmyUnitId"
+              @change="cboArmyUnit_Change"
+              :options="armyUnits"
+              :fieldNames="{ label: 'Name', value: 'Id' }"
+              :filter-option="filterOption"
+              placeholder="Đơn vị"
+            ></a-select>
+          </a-form-item>
+        </a-col>
       </a-row>
     </a-form>
   </a-modal>
