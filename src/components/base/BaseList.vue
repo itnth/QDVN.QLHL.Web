@@ -86,7 +86,16 @@
               </template>
               <template #bodyCell="{ text, column, record }">
                 <template v-if="column.key === 'operation'">
-                  <a-button @click="edit_Click(record)" class="mr-2" type="primary">Sửa</a-button>
+                  <a-button
+                    v-if="column.isShowViewButton"
+                    @click="view_Click(record)"
+                    class="mr-2"
+                    type="primary"
+                    >Xem</a-button
+                  >
+                  <a-button v-else @click="edit_Click(record)" class="mr-2" type="primary"
+                    >Sửa</a-button
+                  >
                   <a-popconfirm
                     title="Bạn có muốn xóa không?"
                     @confirm="confirmDelete_Click(record)"

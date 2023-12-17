@@ -6,12 +6,17 @@
     v-model:open="showForm"
     title="Kế hoạch huấn luyện"
     cancelText="Hủy"
-    okText="Lưu"
+    :okText="masterData.EditMode == Enumeration.EditMode.View ? 'Sửa' : 'Lưu'"
     style="top: 0px"
     centered
     @ok="btnOk_click"
   >
-    <a-form ref="formRef" :model="masterData" name="basic">
+    <a-form
+      ref="formRef"
+      :model="masterData"
+      name="basic"
+      :disabled="masterData.EditMode == Enumeration.EditMode.View"
+    >
       <a-row :gutter="[16, 24]">
         <a-col :span="12">
           <a-form-item
@@ -21,6 +26,7 @@
           >
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.TrainingPlanId"
               @change="cboTrainingPlan_Change"
               :options="trainingPlanDatas"
@@ -38,6 +44,7 @@
           >
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.Status"
               @change="cbostatus_Change"
               :options="statusDatas"
@@ -57,6 +64,7 @@
           >
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.AssignToId"
               @change="cboAssignTo_Change"
               :options="assignToDatas"
@@ -70,6 +78,7 @@
           <a-form-item label="Đơn vị" name="ArmyUnitId">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.ArmyUnitId"
               @change="cboArmyUnit_Change"
               :options="armyUnits"
@@ -121,9 +130,10 @@
               <template v-if="column.dataIndex == 'Id'">
                 <a-select
                   class="w-full"
+                  :allowClear="true"
                   ref="select"
                   v-model:value="record.DeviceId"
-                  :options="DevicesData"
+                  :options="devices"
                   @change="(_, o) => cboDevice_Change(o, record)"
                   :fieldNames="{ label: 'Name', value: 'Id' }"
                 />
@@ -155,7 +165,7 @@
           <a-checkbox v-model:checked="masterData.IsExam"> Kế hoạch kiểm tra </a-checkbox>
         </a-col>
         <a-col :span="24">
-          <a-table class="!w-full" :columns="columns" :data-source="dataSource" bordered>
+          <a-table class="!w-full" :columns="columns" :data-source="dsStudents" bordered>
             <template #bodyCell="{ column, text, record }">
               <template v-if="column.dataIndex == 'IsAbsent'">
                 <a-checkbox v-model:checked="record.IsAbsent" />

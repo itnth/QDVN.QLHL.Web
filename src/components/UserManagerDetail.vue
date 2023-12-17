@@ -59,6 +59,7 @@
               v-model:value="masterData.ArrayManagingArmyUnitIds"
               :options="armyUnits"
               mode="multiple"
+              :allowClear="true"
               :filterOption="(i, o) => o.Name.toLowerCase().includes(i.toLowerCase())"
               :fieldNames="{ label: 'Name', value: 'Id' }"
               placeholder="Đơn vị"

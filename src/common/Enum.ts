@@ -16,6 +16,7 @@ export const Enumeration = {
     Add: 1,
     Edit: 2,
     Delete: 3,
-    Copy: 4
+    Copy: 4,
+    View: 5
   }
 }

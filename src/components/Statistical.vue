@@ -53,8 +53,23 @@
       </a-col>
     </a-row>
     <a-row class="mt-4" v-if="reportOption.Type == 2">
-      <a-col :span="24">
+      <a-col :span="12">
         <a-table :columns="summaryColumns" :dataSource="reportData"> </a-table>
+      </a-col>
+      <a-col :span="12">
+        <a-radio-group class="ml-4" v-model:value="reportOption.PieChartType" name="pieChartType">
+          <a-radio :value="1">Tỉ lệ đạt</a-radio>
+          <a-radio :value="2">Tỉ lệ không đạt</a-radio>
+        </a-radio-group>
+        <div>
+          <Pie
+            :data="chartData"
+            :options="{
+              responsive: true,
+              maintainAspectRatio: false
+            }"
+          />
+        </div>
       </a-col>
     </a-row>
   </a-page-header>

@@ -39,6 +39,7 @@
               @change="cboType_Change"
               :options="types"
               :filter-option="filterOption"
+              :allowClear="true"
               placeholder="Loại trang bị"
             ></a-select>
           </a-form-item>
@@ -56,6 +57,7 @@
               v-model:value="masterData.ArmyUnitId"
               @change="cboArmyUnit_Change"
               :options="armyUnits"
+              :allowClear="true"
               :fieldNames="{ label: 'Name', value: 'Id' }"
               :filter-option="filterOption"
               placeholder="Đơn vị"

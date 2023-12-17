@@ -24,6 +24,7 @@
           <a-form-item label="Đơn vị" name="UnitId">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.ArmyUnitId"
               @change="cboArmyUnit_Change"
               :options="armyUnits"
@@ -48,6 +49,7 @@
           <a-form-item label="Cấp bậc" name="Rank">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.Rank"
               @change="cboRank_Change"
               :options="ranks"
@@ -70,6 +72,7 @@
           <a-form-item label="Chức vụ" name="Parent">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.Position"
               @change="cboPosition_Change"
               :options="positions"

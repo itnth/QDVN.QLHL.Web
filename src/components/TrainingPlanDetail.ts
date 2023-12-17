@@ -9,6 +9,7 @@ import { Class } from '@/models/Class'
 import Editor from '@tinymce/tinymce-vue'
 import tinymce from 'tinymce/tinymce'
 import type { Managers } from '@/models/Managers'
+import { Enumeration } from '@/common/Enum'
 export default defineComponent({
   components: { Editor },
   props: [],
@@ -131,7 +132,9 @@ export default defineComponent({
       }
       const resTP: BaseRespone = await axios.get('TrainingPlan/SelectAll')
       if (resTP && resTP.Success && resTP.Data) {
-        TrainingPlansData.value = <Array<TrainingPlan>>resTP.Data
+        TrainingPlansData.value = <Array<TrainingPlan>>(
+          resTP.Data.filter((x) => x.ParentId == '00000000-0000-0000-0000-000000000000')
+        )
       }
       const resM: BaseRespone = await axios.get('Managers/SelectAll')
       if (resM && resM.Success && resM.Data) {
@@ -144,17 +147,21 @@ export default defineComponent({
     }
     const btnOk_click = () => {
       if (masterData.value) {
-        formRef.value.validate().then(async () => {
-          const res: BaseRespone = await axios.post(
-            'TrainingPlan/SaveData',
-            Array<TrainingPlan>(masterData.value)
-          )
-          if (res && res.Success && res.Data) {
-            // ...
-            showForm.value = false
-            ctx.emit('SaveSuccess', true)
-          }
-        })
+        if (masterData.value.EditMode == Enumeration.EditMode.View) {
+          masterData.value.EditMode = Enumeration.EditMode.Edit
+        } else {
+          formRef.value.validate().then(async () => {
+            const res: BaseRespone = await axios.post(
+              'TrainingPlan/SaveData',
+              Array<TrainingPlan>(masterData.value)
+            )
+            if (res && res.Success && res.Data) {
+              // ...
+              showForm.value = false
+              ctx.emit('SaveSuccess', true)
+            }
+          })
+        }
       }
     }
     const filterOption = (input: string, option: any) => {
@@ -199,7 +206,8 @@ export default defineComponent({
       cboManager_Change,
       cboParent_Change,
       armyUnits,
-      cboArmyUnit_Change
+      cboArmyUnit_Change,
+      Enumeration
     }
   }
 })

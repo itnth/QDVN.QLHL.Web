@@ -152,7 +152,7 @@ export default defineComponent({
           return valid
         }
       },
-      { title: '', key: 'operation' }
+      { title: '', key: 'operation', isShowViewButton: true }
     ])
     const innerColumns = [
       {
@@ -225,7 +225,7 @@ export default defineComponent({
     }
     const edit_Click = (record: TrainingPlan) => {
       try {
-        record.EditMode = Enumeration.EditMode.Edit
+        record.EditMode = Enumeration.EditMode.View
         trainingPlanDetail.value.show(record)
       } catch (error) {
         console.log(error)

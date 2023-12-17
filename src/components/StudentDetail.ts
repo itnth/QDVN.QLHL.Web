@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import './StudentDetail.css'
 import { CommonStored } from '@/common/CommonStored'
 import type { BaseRespone } from '@/models/BaseRespone'

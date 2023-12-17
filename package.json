@@ -14,10 +14,12 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^5.1.1",
     "ant-design-vue": "^4.0.6",
+    "chart.js": "^4.4.1",
     "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",
     "vue-axios": "^3.5.2",
+    "vue-chartjs": "^5.3.0",
     "vue-moment": "^4.1.0",
     "vue-router": "^4.2.5"
   },

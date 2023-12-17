@@ -1,13 +1,32 @@
-import { defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import './Statistical.css'
 import type { BaseRespone } from '@/models/BaseRespone'
 import axios from '@/common/axios'
 import type { Student } from '@/models/Student'
 import type { Class } from '@/models/Class'
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Pie } from 'vue-chartjs'
+import { Colors } from 'chart.js'
+
+ChartJS.register(Colors)
+ChartJS.register(ArcElement, Tooltip, Legend)
 export default defineComponent({
-  components: {},
+  components: { Pie },
   setup(props, ctx) {
-    const reportOption = ref({ Type: 1 })
+    const chartData = computed(() => ({
+      labels: reportData.value.map((x) => x.ArmyUnitName),
+      datasets: [
+        {
+          data: reportData.value.map((x) =>
+            reportOption.value.PieChartType == 1 ? x.Good : x.NotGood
+          ),
+          backgroundColor: reportData.value.map(
+            () => `#${Math.floor(Math.random() * 16777215).toString(16)}`
+          )
+        }
+      ]
+    }))
+    const reportOption = ref({ Type: 1, PieChartType: 1 })
     const armyUnits = ref([])
     const subjects = ref([])
     const reportData = ref([])
@@ -137,7 +156,8 @@ export default defineComponent({
       reportData,
       reportRankSummary,
       cboArmyUnit_Change,
-      summaryColumns
+      summaryColumns,
+      chartData
     }
   }
 })

@@ -15,6 +15,7 @@ import { ImplementTrainingPlansParam } from '@/models/ImplementTrainingPlansPara
 import { h } from 'vue'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons-vue'
 import { DeviceManager } from '@/models/DeviceManager'
+import { Enumeration } from '@/common/Enum'
 const defaultColumns = [
   {
     title: 'Mã học viên',
@@ -91,6 +92,12 @@ export default defineComponent({
     const dataSource = ref([])
     const dsDevices = ref([])
     const DevicesData = ref([])
+    const dsStudents = computed(() =>
+      dataSource.value.filter((x) => x.ArmyUnitId == masterData.value.ArmyUnitId)
+    )
+    const devices = computed(() =>
+      DevicesData.value.filter((x) => x.ArmyUnitId == masterData.value.ArmyUnitId)
+    )
     const show = async (data: ImplementTrainingPlans) => {
       showForm.value = true
       masterData.value = data
@@ -143,7 +150,7 @@ export default defineComponent({
       )
     }
     const del = (index: number) => {
-      delete dsDevices.value[index]
+      dsDevices.value.splice(index, 1)
     }
     const save = (key: string) => {
       Object.assign(
@@ -163,21 +170,25 @@ export default defineComponent({
     }
     const btnOk_click = () => {
       if (masterData.value) {
-        formRef.value.validate().then(async () => {
-          const param = new ImplementTrainingPlansParam()
-          param.MasterData = masterData.value
-          param.ImplementTrainingPlansDevices = dsDevices.value
-          param.ImplementTrainingPlansStudents = dataSource.value
-          const res: BaseRespone = await axios.post(
-            'ImplementTrainingPlans/SaveImplementTrainingPlans',
-            param
-          )
-          if (res && res.Success && res.Data) {
-            // ...
-            showForm.value = false
-            ctx.emit('SaveSuccess', true)
-          }
-        })
+        if (masterData.value.EditMode == Enumeration.EditMode.View) {
+          masterData.value.EditMode = Enumeration.EditMode.Edit
+        } else {
+          formRef.value.validate().then(async () => {
+            const param = new ImplementTrainingPlansParam()
+            param.MasterData = masterData.value
+            param.ImplementTrainingPlansDevices = dsDevices.value
+            param.ImplementTrainingPlansStudents = dataSource.value
+            const res: BaseRespone = await axios.post(
+              'ImplementTrainingPlans/SaveImplementTrainingPlans',
+              param
+            )
+            if (res && res.Success && res.Data) {
+              // ...
+              showForm.value = false
+              ctx.emit('SaveSuccess', true)
+            }
+          })
+        }
       }
     }
     const filterOption = (input: string, option: any) => {
@@ -241,7 +252,10 @@ export default defineComponent({
       DeleteOutlined,
       cboDevice_Change,
       armyUnits,
-      cboArmyUnit_Change
+      cboArmyUnit_Change,
+      Enumeration,
+      dsStudents,
+      devices
     }
   }
 })

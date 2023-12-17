@@ -36,6 +36,13 @@ export default defineComponent({
         console.log(error)
       }
     }
+    const view_Click = (record: any) => {
+      try {
+        ctx.emit('view_Click', record)
+      } catch (error) {
+        console.log(error)
+      }
+    }
     const confirmDelete_Click = (record: any) => {
       try {
         ctx.emit('delete_Click', record)
@@ -81,7 +88,8 @@ export default defineComponent({
       state,
       searchInput,
       moment,
-      filterOption
+      filterOption,
+      view_Click
     }
   }
 })

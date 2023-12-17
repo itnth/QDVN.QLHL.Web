@@ -62,7 +62,7 @@ export default defineComponent({
         dataIndex: 'StatusName',
         key: 'StatusName'
       },
-      { title: '', key: 'operation' }
+      { title: '', key: 'operation', isShowViewButton: true }
     ]
     const add_Click = () => {
       try {
@@ -75,7 +75,7 @@ export default defineComponent({
     }
     const edit_Click = (record: TrainingPlan) => {
       try {
-        record.EditMode = Enumeration.EditMode.Edit
+        record.EditMode = Enumeration.EditMode.View
         implementTrainingPlansDetail.value.show(record)
       } catch (error) {
         console.log(error)

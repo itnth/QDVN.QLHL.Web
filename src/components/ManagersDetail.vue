@@ -10,8 +10,7 @@
     centered
     @ok="btnOk_click"
   >
-    <a-form ref="formRef" :model="masterData" name="basic" 
->
+    <a-form ref="formRef" :model="masterData" name="basic">
       <a-row :gutter="[16, 24]">
         <a-col :span="12"
           ><a-form-item
@@ -25,6 +24,7 @@
           <a-form-item label="Đơn vị" name="UnitId">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.ArmyUnitId"
               @change="cboArmyUnit_Change"
               :options="armyUnits"
@@ -49,6 +49,7 @@
           <a-form-item label="Cấp bậc" name="Rank">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.Rank"
               @change="cboRank_Change"
               :options="ranks"
@@ -88,7 +89,11 @@
             name="DateOfBirth"
             :rules="[{ required: true, message: 'Ngày sinh không được để trống!' }]"
           >
-            <a-date-picker class="!w-full" v-model:value="masterData.DateOfBirth" :format="'DD/MM/YYYY'" /> </a-form-item
+            <a-date-picker
+              class="!w-full"
+              v-model:value="masterData.DateOfBirth"
+              :format="'DD/MM/YYYY'"
+            /> </a-form-item
         ></a-col>
         <a-col :span="12">
           <a-form-item

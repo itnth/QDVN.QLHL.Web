@@ -6,12 +6,17 @@
     v-model:open="showForm"
     title="Kế hoạch huấn luyện"
     cancelText="Hủy"
-    okText="Lưu"
+    :okText="masterData.EditMode == Enumeration.EditMode.View ? 'Sửa' : 'Lưu'"
     style="top: 0px"
     centered
     @ok="btnOk_click"
   >
-    <a-form ref="formRef" :model="masterData" name="basic">
+    <a-form
+      ref="formRef"
+      :model="masterData"
+      name="basic"
+      :disabled="masterData.EditMode == Enumeration.EditMode.View"
+    >
       <a-row :gutter="[16, 24]">
         <a-col :span="12"
           ><a-form-item
@@ -36,6 +41,7 @@
           <a-form-item label="Nội dung" name="Subject">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.SubjectId"
               @change="cboSubject_Change"
               :options="SubjectDatas"
@@ -49,6 +55,7 @@
           <a-form-item label="Kế hoạch cha" name="Parent">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.ParentId"
               :options="TrainingPlansData"
               :fieldNames="{ label: 'Name', value: 'Id' }"
@@ -91,6 +98,7 @@
           <a-form-item label="Đơn vị" name="UnitId">
             <a-select
               show-search
+              :allowClear="true"
               v-model:value="masterData.ArmyUnitId"
               @change="cboArmyUnit_Change"
               :options="armyUnits"
@@ -111,6 +119,7 @@
           v-model="masterData.ResouceContent"
           style="height: 450px !important"
           :init="editorInit"
+          :disabled="masterData.EditMode == Enumeration.EditMode.View"
         />
       </a-row>
     </a-form>

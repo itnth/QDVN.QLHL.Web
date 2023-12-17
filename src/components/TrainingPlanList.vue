@@ -6,7 +6,7 @@
       :dataBinding="data"
       @delete_Click="confirmDelete_Click"
       @add_Click="add_Click"
-      @edit_Click="edit_Click"
+      @view_Click="edit_Click"
       :showChildrens="true"
       :innerColumns="innerColumns"
     />
